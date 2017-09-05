@@ -375,5 +375,4 @@ class CI_Config {
 	{
 		$this->config[$item] = $value;
 	}
-
 }
