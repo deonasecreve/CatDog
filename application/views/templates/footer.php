@@ -1,3 +1,5 @@
- 			<em>&copy; 2015</em>
-        </body>
+ 			</div><!--row-->   
+    </div><!-- /container -->  
+    
+    </body>
 </html>
