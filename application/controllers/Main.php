@@ -114,4 +114,31 @@ class Main extends CI_Controller {
                 
             }
         }
+
+        public function login()
+            {
+                $this->form_validation->set_rules('email', 'Email', 'required|valid_email');    
+                $this->form_validation->set_rules('password', 'Password', 'required'); 
+                
+                if($this->form_validation->run() == FALSE) {
+                    $this->load->view('templates/header');
+                    $this->load->view('pages/login');
+                    $this->load->view('templates/footer');
+                }else{
+                    
+                    $post = $this->input->post();  
+                    $clean = $this->security->xss_clean($post);
+                    
+                    $userInfo = $this->user_model->checkLogin($clean);
+                    
+                    if(!$userInfo){
+                        $this->session->set_flashdata('flash_message', 'The login was unsucessful');
+                        redirect(site_url().'/main/login');
+                    }                
+                    foreach($userInfo as $key=>$val){
+                        $this->session->set_userdata($key, $val);
+                    }
+                    redirect(site_url().'/main/');
+                }        
+        }
 } 
