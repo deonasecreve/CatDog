@@ -98,8 +98,9 @@ class Main extends CI_Controller {
                 $hashed = $this->password->create_hash($cleanPost['password']);                
                 $cleanPost['password'] = $hashed;
                 unset($cleanPost['passconf']);
+                $cleanPost['user_id'] = $data['user_id'];
                 $userInfo = $this->user_model->updateUserInfo($cleanPost);
-                
+
                 if(!$userInfo){
                     $this->session->set_flashdata('flash_message', 'There was a problem updating your record');
                     redirect(site_url().'/main/login');
@@ -110,7 +111,7 @@ class Main extends CI_Controller {
                 foreach($userInfo as $key=>$val){
                     $this->session->set_userdata($key, $val);
                 }
-                redirect(site_url().'/main/');
+                redirect(site_url().'/main/login');
                 
             }
         }

@@ -97,8 +97,8 @@ class User_model extends CI_Model {
             );
         $this->db->where('id', $post['user_id']);
         $this->db->update('users', $data); 
-        $success = $this->db->affected_rows(); 
-        
+        $success = $this->db->affected_rows();
+
         if(!$success){
             error_log('Unable to updateUserInfo('.$post['user_id'].')');
             return false;
