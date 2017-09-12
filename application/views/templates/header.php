@@ -25,21 +25,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="#">CatDog</a>
         </div>
     
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-3">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Works</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
-            <li>
-              <a class="btn btn-default btn-outline btn-circle"  data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
-            </li>
+           <?php if($this->session->userdata('id')==''){ ?>
+            <li><a href="<?php echo site_url();?>/main/register">Register</a></li>
+            <li><a href="<?php echo site_url();?>/main/login">login</a></li>
+            <?php }else{ ?>
+            <li><a href="<?php echo site_url();?>/main/logout">Logout</a></li>
+            <?php } ?>
           </ul>
           <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse3">
             <form class="navbar-form navbar-right" role="search">
