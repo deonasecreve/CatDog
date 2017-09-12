@@ -1,6 +1,4 @@
-<h3>Welcome</h3>
-
-<?php
-echo'Click ';
-echo anchor('/pages/register', 'here', 'class="link-class"');
-echo ' to make a gamer profile and play the game!';
+<div class="col-lg-2 col-lg-offset-2">
+<h1>Welcome</h1>
+<p>Click to <a href="<?php echo site_url();?>/main/register">Register</a></p>
+</div>

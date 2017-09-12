@@ -16,7 +16,9 @@ class Main extends CI_Controller {
 
         public function index()
         {
+            $this->load->view('templates/header');
             $this->load->view('pages/index');
+            $this->load->view('templates/footer');
         }   
 
         public function register()
@@ -225,5 +227,11 @@ class Main extends CI_Controller {
                 }
                 redirect(site_url().'/main/login');                
             }
+        }
+
+        public function logout(){
+            $array_items = array('__ci_last_regenerate', 'id', 'email', 'first_name', 'last_name', 'role', 'last_login', 'status');
+            $this->session->unset_userdata($array_items);
+            redirect(site_url().'/main/login'); 
         }
 } 
