@@ -36,6 +36,7 @@
             <li><a href="<?php echo site_url();?>/main/login">login</a></li>
             <?php }else{ ?>
             <li><a href="<?php echo site_url();?>/main/logout">Logout</a></li>
+            <li><a href="<?php echo site_url();?>/profile/index">Mijn profiel</a></li>
             <?php } ?>
           </ul>
           <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse3">
