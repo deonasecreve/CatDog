@@ -17,7 +17,17 @@ class Main extends CI_Controller {
         public function index()
         {
             $this->load->view('templates/header');
-            $this->load->view('pages/index');
+
+            if ($this->session->role == 'admin')
+            {
+                $users = $this->user_model->getAllUsers();
+                $data = array('users' => $users);
+                $this->load->view('pages/index', $data);
+            }
+            elseif ($this->session->role == 'subscriber')
+            {
+                $this->load->view('pages/index');
+            }
             $this->load->view('templates/footer');
         }   
 
@@ -229,9 +239,16 @@ class Main extends CI_Controller {
             }
         }
 
-        public function logout(){
+        public function logout()
+        {
             $array_items = array('__ci_last_regenerate', 'id', 'email', 'first_name', 'last_name', 'role', 'last_login', 'status');
             $this->session->unset_userdata($array_items);
             redirect(site_url().'/main/login'); 
+        }
+
+        public function delete($id)
+        {
+            $this->user_model->deleteUser($id);
+            header('Location: '. site_url() .'/main/index');
         }
 } 
