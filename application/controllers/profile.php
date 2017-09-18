@@ -5,9 +5,15 @@
                 $this->load->model('profile_model', 'profile_model', TRUE);
             }
                 public function index(){
-                $this->load->view('templates/header');
-                $this->load->view('pages/profile');
-                $this->load->view('templates/footer');
+                    if($this->session->userdata('id')==''){
+                        $this->load->view('templates/header');
+                        $this->load->view('pages/login');
+                        $this->load->view('templates/footer');
+                    }else{
+                        $this->load->view('templates/header');
+                        $this->load->view('pages/profile');
+                        $this->load->view('templates/footer');
+                    }
                 }
             
 /*              public function getProfile(){   
