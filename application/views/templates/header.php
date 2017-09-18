@@ -12,6 +12,7 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="/CatDog/inc/css/bootstrap.css">
+        <link rel="stylesheet" href="/CatDog/inc/css/main.css">
     </head>
     <body>
     	<!-- Second navbar for search -->

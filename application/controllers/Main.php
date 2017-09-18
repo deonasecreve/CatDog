@@ -258,4 +258,19 @@ class Main extends CI_Controller {
             }
             header('Location: '. site_url() .'/main/index');
         }
+
+        public function edit($id)
+        {
+            if ($this->session->role == 'admin')
+            {
+                $this->load->view('templates/header');
+                $this->load->view('pages/edit');
+                $this->load->view('templates/footer');
+            }
+            else
+            {
+                echo "U heeft geen rechten om gebruiker te verwijderen!";
+                header('Location: '. site_url() .'/main/index');
+            }
+        }
 } 
