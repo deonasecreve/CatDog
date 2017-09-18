@@ -150,6 +150,7 @@ class User_model extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('users');
+        $this->db->where('id !=', $this->session->id);
         $query = $this->db->get();
         $users = $query->result_array();
         return $users;
