@@ -18,6 +18,5 @@
             
                 public function update(){
                     $updateUserInfo = $this->profile_model->updateUser();
-                    
                 }
             }

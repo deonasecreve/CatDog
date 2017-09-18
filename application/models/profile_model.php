@@ -16,14 +16,13 @@ class profile_model extends CI_Model {
                    'first_name' => $this->input->post('Firstname'), 
                    'last_name' => $this->input->post('Lastname'),
             );
-        var_dump($profileData);
         $this->db->where('id', $_SESSION['id']);
         $this->db->update('users', $profileData); 
         $success = $this->db->affected_rows();
 
         if(!$success){
-            var_dump('fout');
-            return false;
+            redirect(site_url().'/profile/index');
+            echo 'fout';
         }else{
             $this->session->set_userdata($profileData);
             redirect(site_url().'/main/index');
