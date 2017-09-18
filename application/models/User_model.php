@@ -145,4 +145,19 @@ class User_model extends CI_Model {
             return false;
         }
     }
+
+    public function getAllUsers()
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $query = $this->db->get();
+        $users = $query->result_array();
+        return $users;
+    }
+
+    public function deleteUser($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('users');
+    }
 }
