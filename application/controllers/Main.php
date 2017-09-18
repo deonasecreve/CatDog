@@ -124,7 +124,7 @@ class Main extends CI_Controller {
                 foreach($userInfo as $key=>$val){
                     $this->session->set_userdata($key, $val);
                 }
-                redirect(site_url().'/main/login');
+                redirect(site_url().'/main/index');
                 
             }
         }
@@ -248,7 +248,14 @@ class Main extends CI_Controller {
 
         public function delete($id)
         {
-            $this->user_model->deleteUser($id);
+            if ($this->session->role == 'admin')
+            {
+                $this->user_model->deleteUser($id);
+            }
+            else
+            {
+                echo "U heeft geen rechten om gebruiker te verwijderen!";
+            }
             header('Location: '. site_url() .'/main/index');
         }
 } 
