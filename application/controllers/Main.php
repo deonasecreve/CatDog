@@ -261,7 +261,11 @@ class Main extends CI_Controller {
 
         public function edit($id)
         {
-            if ($this->session->role == 'admin')
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');    
+            $this->form_validation->set_rules('first_name', 'First_name', 'required'); 
+            $this->form_validation->set_rules('last_name', 'Last_name', 'required'); 
+
+            if ($this->session->role == 'admin' && $this->form_validation->run() == FALSE)
             {
                 $user = $this->user_model->getUserInfo($id);
                 $array = json_decode(json_encode($user), True);
@@ -273,8 +277,18 @@ class Main extends CI_Controller {
             }
             else
             {
-                echo "U heeft geen rechten om gebruiker te wijzigen!";
-                header('Location: '. site_url() .'/main/index');
+                $post = $this->input->post();  
+                $clean = $this->security->xss_clean($post);
+                $userInfo = $this->user_model->updateUser($clean);
+
+                if(!$userInfo){
+                    $this->session->set_flashdata('flash_message', 'The update was unsucessful');
+                    redirect(site_url().'/main/edit/'. $id);
+                }
+                else
+                {
+                    redirect(site_url().'/main/');
+                }          
             }
         }
 } 

@@ -1,6 +1,7 @@
 <?php
 $attributes = array('class' => 'form-horizontal edit_form');
-echo form_open(site_url().'/main/edit/', $attributes);
+echo form_open(site_url().'/main/edit/'. $user['id'], $attributes);
+echo form_hidden('id', $user['id']);
 ?>
 <fieldset>
   <div class="form-group">
