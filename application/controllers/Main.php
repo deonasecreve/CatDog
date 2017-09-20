@@ -263,13 +263,17 @@ class Main extends CI_Controller {
         {
             if ($this->session->role == 'admin')
             {
+                $user = $this->user_model->getUserInfo($id);
+                $array = json_decode(json_encode($user), True);
+                $data = array('user' => $array);
+
                 $this->load->view('templates/header');
-                $this->load->view('pages/edit');
+                $this->load->view('pages/edit', $data);
                 $this->load->view('templates/footer');
             }
             else
             {
-                echo "U heeft geen rechten om gebruiker te verwijderen!";
+                echo "U heeft geen rechten om gebruiker te wijzigen!";
                 header('Location: '. site_url() .'/main/index');
             }
         }
