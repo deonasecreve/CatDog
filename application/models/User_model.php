@@ -146,22 +146,6 @@ class User_model extends CI_Model {
         }
     }
 
-    public function getAllUsers()
-    {
-        $this->db->select('*');
-        $this->db->from('users');
-        $this->db->where('id !=', $this->session->id);
-        $query = $this->db->get();
-        $users = $query->result_array();
-        return $users;
-    }
-
-    public function deleteUser($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete('users');
-    }
-
     public function updateUser($post)
     {
         $data = array(

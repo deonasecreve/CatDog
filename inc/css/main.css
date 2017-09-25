@@ -2,3 +2,18 @@
 {
 	width: 100%;
 }
+
+.wrapper
+{
+	font-size: 14px !important;
+}
+
+.navbar
+{
+	padding: 0 1rem !important;
+}
+
+.skin-blue .wrapper .main-header .navbar:before, .skin-blue .wrapper .main-header .navbar:after
+{
+	content: none !important;
+}

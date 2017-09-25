@@ -17,17 +17,7 @@ class Main extends CI_Controller {
         public function index()
         {
             $this->load->view('templates/header');
-
-            if ($this->session->role == 'admin')
-            {
-                $users = $this->user_model->getAllUsers();
-                $data = array('users' => $users);
-                $this->load->view('pages/index', $data);
-            }
-            elseif ($this->session->role == 'subscriber')
-            {
-                $this->load->view('pages/index');
-            }
+            $this->load->view('pages/index');
             $this->load->view('templates/footer');
         }   
 
@@ -244,51 +234,5 @@ class Main extends CI_Controller {
             $array_items = array('__ci_last_regenerate', 'id', 'email', 'first_name', 'last_name', 'role', 'last_login', 'status');
             $this->session->unset_userdata($array_items);
             redirect(site_url().'/main/login'); 
-        }
-
-        public function delete($id)
-        {
-            if ($this->session->role == 'admin')
-            {
-                $this->user_model->deleteUser($id);
-            }
-            else
-            {
-                echo "U heeft geen rechten om gebruiker te verwijderen!";
-            }
-            header('Location: '. site_url() .'/main/index');
-        }
-
-        public function edit($id)
-        {
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');    
-            $this->form_validation->set_rules('first_name', 'First_name', 'required'); 
-            $this->form_validation->set_rules('last_name', 'Last_name', 'required'); 
-
-            if ($this->session->role == 'admin' && $this->form_validation->run() == FALSE)
-            {
-                $user = $this->user_model->getUserInfo($id);
-                $array = json_decode(json_encode($user), True);
-                $data = array('user' => $array);
-
-                $this->load->view('templates/header');
-                $this->load->view('pages/edit', $data);
-                $this->load->view('templates/footer');
-            }
-            else
-            {
-                $post = $this->input->post();  
-                $clean = $this->security->xss_clean($post);
-                $userInfo = $this->user_model->updateUser($clean);
-
-                if(!$userInfo){
-                    $this->session->set_flashdata('flash_message', 'The update was unsucessful');
-                    redirect(site_url().'/main/edit/'. $id);
-                }
-                else
-                {
-                    redirect(site_url().'/main/');
-                }          
-            }
         }
 } 

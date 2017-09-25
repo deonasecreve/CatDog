@@ -32,9 +32,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-3">
           <ul class="nav navbar-nav navbar-right">
-           <?php if($this->session->userdata('id')==''){ ?>
+           <?php if(!isset($this->session->role)){ ?>
             <li><a href="<?php echo site_url();?>/main/register">Register</a></li>
             <li><a href="<?php echo site_url();?>/main/login">login</a></li>
+            <?php }elseif($this->session->role == 'admin'){ ?>
+            <li><a href="<?php echo site_url();?>/admin/index">Admin panel</a></li>
+            <li><a href="<?php echo site_url();?>/main/logout">Logout</a></li>
+            <li><a href="<?php echo site_url();?>/profile/index">Mijn profiel</a></li>
             <?php }else{ ?>
             <li><a href="<?php echo site_url();?>/main/logout">Logout</a></li>
             <li><a href="<?php echo site_url();?>/profile/index">Mijn profiel</a></li>

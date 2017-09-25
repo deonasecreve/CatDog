@@ -1,6 +1,7 @@
+<div class="content-wrapper">
 <?php
 $attributes = array('class' => 'form-horizontal edit_form');
-echo form_open(site_url().'/main/edit/'. $user['id'], $attributes);
+echo form_open(site_url().'/admin/edit/'. $user['id'], $attributes);
 echo form_hidden('id', $user['id']);
 ?>
 <fieldset>
@@ -48,3 +49,4 @@ echo form_hidden('id', $user['id']);
     </div>
   </div>
 </fieldset>
+</div>
