@@ -21,9 +21,10 @@ class profile_model extends CI_Model {
         $success = $this->db->affected_rows();
 
         if(!$success){
+            $this->session->set_flashdata('flash_message', 'U heeft niks gewijzigd');
             redirect(site_url().'/profile/index');
-            echo 'fout';
         }else{
+            $this->session->set_flashdata('flash_good_message', 'U heeft uw profiel bewerkt');
             $this->session->set_userdata($profileData);
             redirect(site_url().'/main/index');
         }

@@ -160,5 +160,11 @@ class User_model extends CI_Model {
     {
         $this->db->where('id', $id);
         $this->db->delete('users');
+        if($this->db->affected_rows()== 0){
+            $this->session->set_flashdata('flash_message', 'Het is niet geluk'); 
+        }else{
+             $this->session->set_flashdata('flash_good_message', 'U heeft het gebruiker verwijderd');
+        }
+    
     }
 }

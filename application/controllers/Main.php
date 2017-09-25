@@ -6,6 +6,9 @@ class Main extends CI_Controller {
     
         function __construct(){
             parent::__construct();
+            
+            // heb ik wel de juiste rechten? zo niet dan redirect
+            
             $this->load->model('User_model', 'user_model', TRUE);
             $this->load->library('form_validation');
             $this->load->library('session');
@@ -33,6 +36,7 @@ class Main extends CI_Controller {
 
         public function register()
         {
+            // 
              
             $this->form_validation->set_rules('firstname', 'First Name', 'required');
             $this->form_validation->set_rules('lastname', 'Last Name', 'required');    
@@ -254,7 +258,7 @@ class Main extends CI_Controller {
             }
             else
             {
-                echo "U heeft geen rechten om gebruiker te verwijderen!";
+                $this->session->set_flashdata('flash_message', 'U heeft geen rechten om gebruiker te verwijderen!');
             }
             header('Location: '. site_url() .'/main/index');
         }

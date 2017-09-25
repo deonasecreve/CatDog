@@ -1,0 +1,30 @@
+#danger-alert {
+	opacity:0;
+    width: 100%;
+    height: 50px;
+    background-color: red;
+    position: relative;
+    animation-name: example;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+}
+#succes-alert {
+	opacity:0;
+    width: 100%;
+    height: 50px;
+    background-color: lightgreen;
+    position: relative;
+    animation-name: example;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+}
+
+
+/* Standard syntax */
+@keyframes example {
+    0%   {opacity:1;display: block}
+    25%  {opacity:0.75}
+    50%  {opacity:0.50}
+    75%  {opacity:0.25}
+    100% {opacity:0.0;display:none}
+}
