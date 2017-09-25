@@ -2,15 +2,18 @@
         class profile extends CI_Controller {
             function __construct(){
                 parent::__construct();
+                
                 $this->load->model('profile_model', 'profile_model', TRUE);
             }
                 public function index(){
                     if($this->session->userdata('id')==''){
-                        $this->load->view('templates/header');
+                        $title = array('title' => 'Login');
+                        $this->load->view('templates/header',$title);
                         $this->load->view('pages/login');
                         $this->load->view('templates/footer');
                     }else{
-                        $this->load->view('templates/header');
+                        $title = array('title' => 'Mijn profiel');
+                        $this->load->view('templates/header',$title);
                         $this->load->view('pages/profile');
                         $this->load->view('templates/footer');
                     }

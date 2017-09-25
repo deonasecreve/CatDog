@@ -8,7 +8,6 @@ class Main extends CI_Controller {
             parent::__construct();
             
             // heb ik wel de juiste rechten? zo niet dan redirect
-            
             $this->load->model('User_model', 'user_model', TRUE);
             $this->load->library('form_validation');
             $this->load->library('session');
@@ -19,7 +18,8 @@ class Main extends CI_Controller {
 
         public function index()
         {
-            $this->load->view('templates/header');
+            $title = array('title' => 'Home');
+            $this->load->view('templates/header', $title);
 
             if ($this->session->role == 'admin')
             {
@@ -42,8 +42,9 @@ class Main extends CI_Controller {
             $this->form_validation->set_rules('lastname', 'Last Name', 'required');    
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');    
                        
-            if ($this->form_validation->run() == FALSE) {   
-                $this->load->view('templates/header');
+            if ($this->form_validation->run() == FALSE) {  
+                $title = array('title' => 'Register');
+                $this->load->view('templates/header',$title);
                 $this->load->view('pages/register');
                 $this->load->view('templates/footer');
             }else{                
@@ -102,7 +103,8 @@ class Main extends CI_Controller {
             $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');              
             
             if ($this->form_validation->run() == FALSE) {   
-                $this->load->view('templates/header');
+                $title = array('title' => 'Complete');
+                $this->load->view('templates/header', $title);
                 $this->load->view('pages/complete', $data);
                 $this->load->view('templates/footer');
             }else{
@@ -139,7 +141,8 @@ class Main extends CI_Controller {
                 $this->form_validation->set_rules('password', 'Password', 'required'); 
                 
                 if($this->form_validation->run() == FALSE) {
-                    $this->load->view('templates/header');
+                    $title = array('title' => 'Login');
+                    $this->load->view('templates/header',$title);
                     $this->load->view('pages/login');
                     $this->load->view('templates/footer');
                 }else{
@@ -166,7 +169,8 @@ class Main extends CI_Controller {
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email'); 
             
             if($this->form_validation->run() == FALSE) {
-                $this->load->view('templates/header');
+                $title = array('title' => 'Wachtwoord vergeten');
+                $this->load->view('templates/header',$title);
                 $this->load->view('pages/forgot');
                 $this->load->view('templates/footer');
             }else{
@@ -221,7 +225,8 @@ class Main extends CI_Controller {
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
             $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');              
             
-            if ($this->form_validation->run() == FALSE) {   
+            if ($this->form_validation->run() == FALSE) {  
+                $title = array('title' => 'Wachtwoord resetten');
                 $this->load->view('templates/header');
                 $this->load->view('pages/reset_password', $data);
                 $this->load->view('templates/footer');
