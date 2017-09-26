@@ -9,6 +9,8 @@ class admin extends CI_Controller {
             if ($this->session->role != 'admin' || !$this->session->role)
             {
                 header('Location: '. site_url() .'/main/');
+                $this->session->set_flashdata('flash_message', 'U heeft geen toegang tot deze pagina.');
+                exit();
             }
             $this->load->model('admin_model', 'admin_model', TRUE);
             $this->load->model('user_model', 'user_model', TRUE);
