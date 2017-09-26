@@ -145,4 +145,17 @@ class User_model extends CI_Model {
             return false;
         }
     }
+
+    public function updatePassword($post)
+    {   
+        $this->db->where('id', $post['user_id']);
+        $this->db->update('users', array('password' => $post['password'])); 
+        $success = $this->db->affected_rows(); 
+        
+        if(!$success){
+            error_log('Unable to updatePassword('.$post['user_id'].')');
+            return false;
+        }        
+        return true;
+    } 
 }

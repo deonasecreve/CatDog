@@ -9,6 +9,7 @@ class Main extends CI_Controller {
             $this->load->model('User_model', 'user_model', TRUE);
             $this->load->library('form_validation');
             $this->load->library('session');
+            $this->load->library('email');
             $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
             $this->status = $this->config->item('status'); 
             $this->roles = $this->config->item('roles');
@@ -177,10 +178,10 @@ class Main extends CI_Controller {
                 $url = site_url() . '/main/reset_password/token/' . $qstring;
                 $link = '<a href="' . $url . '">' . $url . '</a>'; 
                 
-                $message = '';                     
+                $message= '';
                 $message .= '<strong>A password reset has been requested for this email account</strong><br>';
                 $message .= '<strong>Please click:</strong> ' . $link;             
-                echo $message; //send this through mail
+                echo ($message);
                 exit;
                 
             }
@@ -199,6 +200,7 @@ class Main extends CI_Controller {
                 redirect(site_url().'/main/login');
             }            
             $data = array(
+                'user_id' => $user_info->id,
                 'firstName'=> $user_info->first_name, 
                 'email'=>$user_info->email,                
                 'token'=>base64_encode($token)
