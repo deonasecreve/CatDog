@@ -230,7 +230,7 @@ class Main extends CI_Controller {
                 if(!$this->user_model->updatePassword($cleanPost)){
                     $this->session->set_flashdata('flash_message', 'There was a problem updating your password');
                 }else{
-                    $this->session->set_flashdata('flash_message', 'Your password has been updated. You may now login');
+                    $this->session->set_flashdata('flash_good_message', 'Your password has been updated. You may now login');
                 }
                 redirect(site_url().'/main/login');                
             }
