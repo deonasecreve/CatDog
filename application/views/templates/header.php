@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="/CatDog/inc/css/bootstrap.css">
     <link rel="stylesheet" href="/CatDog!/inc/css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type = 'text/javascript' src = "<?php echo base_url(); 
-   ?>inc/js/javascript.js"></script>
+    <script type = 'text/javascript' src = "<?php echo base_url(); ?>inc/js/javascript.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -54,17 +54,22 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-3">
           <ul class="nav navbar-nav navbar-right">
-           <?php if(!isset($this->session->role)){ ?>
-            <li><a href="<?php echo site_url();?>/main/register">Register</a></li>
-            <li><a href="<?php echo site_url();?>/main/login">login</a></li>
-            <?php }elseif($this->session->role == 'admin'){ ?>
-            <li><a href="<?php echo site_url();?>/admin/index">Admin panel</a></li>
-            <li><a href="<?php echo site_url();?>/main/logout">Logout</a></li>
-            <li><a href="<?php echo site_url();?>/profile/index">Mijn profiel</a></li>
-            <?php }else{ ?>
-            <li><a href="<?php echo site_url();?>/main/logout">Logout</a></li>
-            <li><a href="<?php echo site_url();?>/profile/index">Mijn profiel</a></li>
-            <?php } ?>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Welkom<?php if($this->session->first_name){echo ', '. $this->session->first_name;} ?></a>
+              <ul class="dropdown-menu">
+                <?php if(!isset($this->session->role)){ ?>
+                <li><a href="<?php echo site_url();?>/main/register">Register</a></li>
+                <li><a href="<?php echo site_url();?>/main/login">login</a></li>
+                <?php }elseif($this->session->role == 'admin'){ ?>
+                <li><a href="<?php echo site_url();?>/admin/index">Admin panel</a></li>
+                <li><a href="<?php echo site_url();?>/profile/index">Mijn profiel</a></li>
+                <li><a href="<?php echo site_url();?>/main/logout">Uitloggen</a></li>
+                <?php }else{ ?>
+                <li><a href="<?php echo site_url();?>/profile/index">Mijn profiel</a></li>
+                <li><a href="<?php echo site_url();?>/main/logout">Uitloggen</a></li>
+                <?php } ?>
+              </ul>
+            </li>
           </ul>
           <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse3">
             <form class="navbar-form navbar-right" role="search">
