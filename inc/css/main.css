@@ -26,7 +26,7 @@
     25%  {opacity:0.75}
     50%  {opacity:0.50}
     75%  {opacity:0.25}
-    100% {opacity:0.0;display:none}
+    100% {opacity:0.0;display: none}
 }
 
 .edit_form
@@ -47,4 +47,9 @@
 .skin-blue .wrapper .main-header .navbar:before, .skin-blue .wrapper .main-header .navbar:after
 {
 	content: none !important;
+}
+
+.adminlte
+{
+	margin-left: 230px !important;
 }

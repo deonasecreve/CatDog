@@ -81,3 +81,14 @@
     </section>
     <!-- /.sidebar -->
   </aside>
+
+  <?php
+            $arr = $this->session->flashdata(); 
+            if(!empty($arr['flash_message'])){
+                $html = '<div class="alert alert-danger alert-dismissable adminlte" id="danger-alert">';
+                $html .= $arr['flash_message']; 
+                $html .= '</div>'; echo $html; }else 
+            if(!empty($arr['flash_good_message'])){
+                $html = '<div class="alert alert-success alert-dismissable adminlte" id="succes-alert">';
+                $html .= $arr['flash_good_message']; 
+                $html .= '</div>'; echo $html; }  ?>
