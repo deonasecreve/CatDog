@@ -74,8 +74,9 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="<?php echo site_url();?>/admin"><i class="fa fa-book"></i> <span>Home</span></a></li>
+        <li><a href="<?php echo site_url();?>/admin"><i class="fa fa-book"></i> <span>Admin panel</span></a></li>
         <li><a href="<?php echo site_url();?>/admin/users"><i class="fa fa-book"></i> <span>Users</span></a></li>
+        <li><a href="<?php echo site_url();?>/main"><i class="fa fa-book"></i> <span>Home page</span></a></li>
         <li><a href="<?php echo site_url();?>/main/logout"><i class="fa fa-book"></i> <span>Logout</span></a></li>
       </ul>
     </section>
