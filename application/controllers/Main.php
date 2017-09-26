@@ -6,8 +6,6 @@ class Main extends CI_Controller {
     
         function __construct(){
             parent::__construct();
-            
-            // heb ik wel de juiste rechten? zo niet dan redirect
             $this->load->model('User_model', 'user_model', TRUE);
             $this->load->library('form_validation');
             $this->load->library('session');
@@ -20,24 +18,12 @@ class Main extends CI_Controller {
         {
             $title = array('title' => 'Home');
             $this->load->view('templates/header', $title);
-
-            if ($this->session->role == 'admin')
-            {
-                $users = $this->user_model->getAllUsers();
-                $data = array('users' => $users);
-                $this->load->view('pages/index', $data);
-            }
-            elseif ($this->session->role == 'subscriber')
-            {
-                $this->load->view('pages/index');
-            }
+            $this->load->view('pages/index');
             $this->load->view('templates/footer');
         }   
 
         public function register()
         {
-            // 
-             
             $this->form_validation->set_rules('firstname', 'First Name', 'required');
             $this->form_validation->set_rules('lastname', 'Last Name', 'required');    
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');    
@@ -253,18 +239,5 @@ class Main extends CI_Controller {
             $array_items = array('__ci_last_regenerate', 'id', 'email', 'first_name', 'last_name', 'role', 'last_login', 'status');
             $this->session->unset_userdata($array_items);
             redirect(site_url().'/main/login'); 
-        }
-
-        public function delete($id)
-        {
-            if ($this->session->role == 'admin')
-            {
-                $this->user_model->deleteUser($id);
-            }
-            else
-            {
-                $this->session->set_flashdata('flash_message', 'U heeft geen rechten om gebruiker te verwijderen!');
-            }
-            header('Location: '. site_url() .'/main/index');
         }
 } 

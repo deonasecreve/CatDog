@@ -146,25 +146,23 @@ class User_model extends CI_Model {
         }
     }
 
-    public function getAllUsers()
+    public function updateUser($post)
     {
-        $this->db->select('*');
-        $this->db->from('users');
-        $this->db->where('id !=', $this->session->id);
-        $query = $this->db->get();
-        $users = $query->result_array();
-        return $users;
-    }
+        $data = array(
+               'email' => $post['email'],
+               'first_name' => $post['first_name'], 
+               'last_name' => $post['last_name']
+            );
+        $this->db->where('id', $post['id']);
+        $this->db->update('users', $data); 
+        $success = $this->db->affected_rows();
 
-    public function deleteUser($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete('users');
-        if($this->db->affected_rows()== 0){
-            $this->session->set_flashdata('flash_message', 'Het is niet geluk'); 
-        }else{
-             $this->session->set_flashdata('flash_good_message', 'U heeft het gebruiker verwijderd');
+        if(!$success){
+            error_log('Unable to updateUserInfo('.$post['id'].')');
+            return false;
         }
-    
+        
+        $user_info = $this->getUserInfo($post['id']); 
+        return $user_info; 
     }
 }

@@ -1,4 +1,5 @@
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="">
 <!--<![endif]-->
@@ -21,6 +22,24 @@
 <body>
     <!-- Second navbar for search -->
 
+=======
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>login</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/CatDog/inc/css/bootstrap.css">
+        <link rel="stylesheet" href="/CatDog/inc/css/main.css">
+    </head>
+    <body>
+    	<!-- Second navbar for search -->
     <nav class="navbar navbar-inverse">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,9 +56,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-3">
           <ul class="nav navbar-nav navbar-right">
-           <?php if($this->session->userdata('id')==''){ ?>
+           <?php if(!isset($this->session->role)){ ?>
             <li><a href="<?php echo site_url();?>/main/register">Register</a></li>
             <li><a href="<?php echo site_url();?>/main/login">login</a></li>
+            <?php }elseif($this->session->role == 'admin'){ ?>
+            <li><a href="<?php echo site_url();?>/admin/index">Admin panel</a></li>
+            <li><a href="<?php echo site_url();?>/main/logout">Logout</a></li>
+            <li><a href="<?php echo site_url();?>/profile/index">Mijn profiel</a></li>
             <?php }else{ ?>
             <li><a href="<?php echo site_url();?>/main/logout">Logout</a></li>
             <li><a href="<?php echo site_url();?>/profile/index">Mijn profiel</a></li>
@@ -62,7 +85,7 @@
                 $html = '<div class="alert alert-danger alert-dismissable" id="danger-alert">';
                 $html .= $arr['flash_message']; 
                 $html .= '</div>'; echo $html; }else 
-    if(!empty($arr['flash_good_message'])){
+            if(!empty($arr['flash_good_message'])){
                 $html = '<div class="alert alert-success alert-dismissable" id="succes-alert">';
                 $html .= $arr['flash_good_message']; 
                 $html .= '</div>'; echo $html; }  ?>
