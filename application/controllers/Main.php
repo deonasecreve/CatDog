@@ -242,4 +242,14 @@ class Main extends CI_Controller {
             $this->session->unset_userdata($array_items);
             redirect(site_url().'/main/login'); 
         }
-} 
+
+        public function mail()
+        {
+            $this->email->to('deona.secreve@outlook.com');
+
+            $this->email->subject('Email Test');
+            $this->email->message('Testing the email class.');
+
+            $this->email->send();
+        }
+}
