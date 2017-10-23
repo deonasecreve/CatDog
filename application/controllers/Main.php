@@ -31,7 +31,7 @@ class Main extends CI_Controller {
                        
             if ($this->form_validation->run() == FALSE) {  
                 $title = array('title' => 'Register');
-                $this->load->view('templates/header',$title);
+                $this->load->view('templates/header', $title);
                 $this->load->view('pages/register');
                 $this->load->view('templates/footer');
             }else{                
@@ -129,7 +129,7 @@ class Main extends CI_Controller {
                 
                 if($this->form_validation->run() == FALSE) {
                     $title = array('title' => 'Login');
-                    $this->load->view('templates/header',$title);
+                    $this->load->view('templates/header', $title);
                     $this->load->view('pages/login');
                     $this->load->view('templates/footer');
                 }else{
@@ -157,7 +157,7 @@ class Main extends CI_Controller {
             
             if($this->form_validation->run() == FALSE) {
                 $title = array('title' => 'Wachtwoord vergeten');
-                $this->load->view('templates/header',$title);
+                $this->load->view('templates/header', $title);
                 $this->load->view('pages/forgot');
                 $this->load->view('templates/footer');
             }else{
@@ -215,7 +215,7 @@ class Main extends CI_Controller {
             
             if ($this->form_validation->run() == FALSE) {  
                 $title = array('title' => 'Wachtwoord resetten');
-                $this->load->view('templates/header');
+                $this->load->view('templates/header', $title);
                 $this->load->view('pages/reset_password', $data);
                 $this->load->view('templates/footer');
             }else{

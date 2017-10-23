@@ -23,14 +23,16 @@ class admin extends CI_Controller {
 
         public function index()
         {
-            $this->load->view('templates/admin_header');
+            $title = array('title' => 'Home Admin');
+            $this->load->view('templates/admin_header',$title);
             $this->load->view('admin_pages/index');
             $this->load->view('templates/admin_footer');
         }
 
         public function users()
         {
-            $this->load->view('templates/admin_header');
+            $title = array('title' => 'Users');
+            $this->load->view('templates/admin_header',$title);
 
             $users = $this->admin_model->getAllUsers();
             $data = array('users' => $users);
@@ -57,7 +59,8 @@ class admin extends CI_Controller {
                 $array = json_decode(json_encode($user), True);
                 $data = array('user' => $array);
 
-                $this->load->view('templates/admin_header');
+                $title = array('title' => 'Edit Users');
+                $this->load->view('templates/admin_header', $title);
                 $this->load->view('admin_pages/edit', $data);
                 $this->load->view('templates/admin_footer');
             }
