@@ -53,3 +53,8 @@
 {
 	margin-left: 230px !important;
 }
+
+.skin-blue .wrapper .content-wrapper .container, .skin-blue .wrapper .edit_form .edit_user_form
+{
+    padding: 10px;
+}

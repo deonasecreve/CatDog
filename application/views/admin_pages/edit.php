@@ -4,7 +4,7 @@ $attributes = array('class' => 'form-horizontal edit_form');
 echo form_open(site_url().'/admin/edit/'. $user['id'], $attributes);
 echo form_hidden('id', $user['id']);
 ?>
-<fieldset>
+<fieldset class="edit_user_form">
   <div class="form-group">
     <label class="col-md-2" for="email">Email</label>
       <div class="col-md-6">
