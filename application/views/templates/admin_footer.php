@@ -35,5 +35,7 @@
 <script src="/CatDog/inc/js/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/CatDog/inc/js/demo.js"></script>
+<!-- Script to remove alerts -->
+<script src="/CatDog/inc/js/remove_alert.js"></script>
 </body>
 </html>
