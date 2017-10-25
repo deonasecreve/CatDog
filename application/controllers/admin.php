@@ -51,7 +51,9 @@ class admin extends CI_Controller {
         {
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');    
             $this->form_validation->set_rules('first_name', 'First_name', 'required'); 
-            $this->form_validation->set_rules('last_name', 'Last_name', 'required'); 
+            $this->form_validation->set_rules('last_name', 'Last_name', 'required');
+            $this->form_validation->set_rules('password', 'Password', 'min_length[5]');
+            $this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[password]'); 
 
             if ($this->form_validation->run() == FALSE)
             {
@@ -66,9 +68,13 @@ class admin extends CI_Controller {
             }
             else
             {
+                $this->load->library('password');
                 $post = $this->input->post();  
-                $clean = $this->security->xss_clean($post);
-                $userInfo = $this->user_model->updateUser($clean);
+                $cleanPost = $this->security->xss_clean($post);
+                $hashed = $this->password->create_hash($cleanPost['password']);
+                $cleanPost['password'] = $hashed;
+                unset($cleanPost['passconf']);
+                $userInfo = $this->user_model->updateUser($cleanPost);
 
                 if(!$userInfo){
                     $this->session->set_flashdata('flash_message', 'The update was unsucessful');
@@ -76,6 +82,7 @@ class admin extends CI_Controller {
                 }
                 else
                 {
+                    $this->session->set_flashdata('flash_good_message', 'Your profile is updated');
                     redirect(site_url().'/admin/users');
                 }          
             }

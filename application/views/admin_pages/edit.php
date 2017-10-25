@@ -42,6 +42,31 @@ echo form_hidden('id', $user['id']);
   </div>
 
   <div class="form-group">
+    <label class="col-md-2" for="password">Password</label>
+      <div class="col-md-6">
+        <?php echo form_password(array(
+          'name' =>'password',
+          'id' => 'password',
+          'placeholder'=>'Password',
+          'class' => 'form-control input-md')); ?>
+        <?php echo form_error('password') ?>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-2">Confirm password</label>
+        <div class="col-md-6">
+          <?php echo form_password(array(
+            'name'=>'passconf',
+            'id'=> 'passconf', 
+            'placeholder'=>'Confirm Password', 
+            'class'=>'form-control input-md', 
+            'value'=> set_value('passconf'))); ?>
+          <?php echo form_error('passconf') ?>
+        </div> 
+      </div> 
+
+  <div class="form-group">
     <label class="col-md-2 control-label" for="singlebutton_login"></label>
     <div class="col-md-6">
       <?php echo form_submit(array('value'=>'Save', 'class'=>'btn btn-primary')); ?>
