@@ -15,6 +15,7 @@ class profile_model extends CI_Model {
                    'email' => $this->input->post('Email'),
                    'first_name' => $this->input->post('Firstname'), 
                    'last_name' => $this->input->post('Lastname'),
+                   'password' => $this->input->post('password')
             );
         $this->db->where('id', $_SESSION['id']);
         $this->db->update('users', $profileData); 

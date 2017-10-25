@@ -151,7 +151,8 @@ class User_model extends CI_Model {
         $data = array(
                'email' => $post['email'],
                'first_name' => $post['first_name'], 
-               'last_name' => $post['last_name']
+               'last_name' => $post['last_name'],
+               'password' => $post['password']
             );
         $this->db->where('id', $post['id']);
         $this->db->update('users', $data); 
