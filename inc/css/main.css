@@ -53,3 +53,10 @@
 {
 	margin-left: 230px !important;
 }
+div#uploadImage {
+    border: 1px dashed;
+}
+.profileImage{
+ max-height: 300px;
+    max-width: 348px;
+}

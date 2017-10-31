@@ -10,14 +10,15 @@ class User_model extends CI_Model {
         $this->roles = $this->config->item('roles');
     }
 
-    public function insertUser($d)
+    public function insertUser($d,$f)
     {  
             $string = array(
                 'first_name'=>$d['firstname'],
                 'last_name'=>$d['lastname'],
                 'email'=>$d['email'],
                 'role'=>$this->roles[0], 
-                'status'=>$this->status[0]
+                'status'=>$this->status[0],
+                'profile_image'=>$f['profileImage']['name'],
             );
             $q = $this->db->insert_string('users',$string);             
             $this->db->query($q);

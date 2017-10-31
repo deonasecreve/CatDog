@@ -21,13 +21,35 @@ class Main extends CI_Controller {
             $this->load->view('templates/header', $title);
             $this->load->view('pages/index');
             $this->load->view('templates/footer');
-        }   
+        }             
+        
+        public function do_upload()
+        {
+                $config['upload_path']          = 'C:\wamp64\www\CatDog\uploads';
+                $config['allowed_types']        = 'gif|jpg|png';
+                $config['max_size']             = 1000;
+                $config['max_width']            = 2024;
+                $config['max_height']           = 2268;
+
+                $this->load->library('upload', $config);
+
+                if ( ! $this->upload->do_upload('profileImage'))
+                {
+                        $error = array('error' => $this->upload->display_errors());
+                        $this->session->set_flashdata('flash_message', 'fout');
+                }
+                else
+                {
+                        $data = array('upload_data' => $this->upload->data());
+                        $this->session->set_flashdata('flash_good_message', 'goed');
+                }
+        }
 
         public function register()
         {
             $this->form_validation->set_rules('firstname', 'First Name', 'required');
             $this->form_validation->set_rules('lastname', 'Last Name', 'required');    
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');    
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');       
                        
             if ($this->form_validation->run() == FALSE) {  
                 $title = array('title' => 'Register');
@@ -39,9 +61,9 @@ class Main extends CI_Controller {
                     $this->session->set_flashdata('flash_message', 'User email already exists, choose another email');
                     redirect(site_url().'/main/register');
                 }else{
-                    
+                    $this->do_upload();
                     $clean = $this->security->xss_clean($this->input->post(NULL, TRUE));
-                    $id = $this->user_model->insertUser($clean); 
+                    $id = $this->user_model->insertUser($clean,$_FILES); 
                     $token = $this->user_model->insertToken($id);                                        
                     
                     $qstring = $this->base64url_encode($token);                      
@@ -79,6 +101,7 @@ class Main extends CI_Controller {
                 $this->session->set_flashdata('flash_message', 'Token is invalid or expired');
                 redirect(site_url().'/main/login');
             }            
+            
             $data = array(
                 'firstName'=> $user_info->first_name, 
                 'email'=>$user_info->email, 
@@ -100,6 +123,7 @@ class Main extends CI_Controller {
                 $post = $this->input->post(NULL, TRUE);
                 
                 $cleanPost = $this->security->xss_clean($post);
+               
                 
                 $hashed = $this->password->create_hash($cleanPost['password']);                
                 $cleanPost['password'] = $hashed;
@@ -238,7 +262,7 @@ class Main extends CI_Controller {
 
         public function logout()
         {
-            $array_items = array('__ci_last_regenerate', 'id', 'email', 'first_name', 'last_name', 'role', 'last_login', 'status');
+            $array_items = array('__ci_last_regenerate', 'id', 'email', 'first_name', 'last_name', 'role', 'last_login', 'status','profile_image');
             $this->session->unset_userdata($array_items);
             redirect(site_url().'/main/login'); 
         }
@@ -252,4 +276,5 @@ class Main extends CI_Controller {
 
             $this->email->send();
         }
+
 }
