@@ -126,6 +126,27 @@ class User_model extends CI_Model {
         unset($userInfo->password);
         return $userInfo; 
     }
+
+    public function checkLoginAPI($email, $password)
+    {
+        $this->load->library('password');       
+        $this->db->select('*');
+        $this->db->where('email', $email);
+        $query = $this->db->get('users');
+        $userInfo = $query->row();
+        
+        if ($userInfo) {
+            if(!$this->password->validate_password($password, $userInfo->password)){
+                error_log('Unsuccessful login attempt('.$email.')');
+                return false; 
+            }
+        }
+        else{
+            return false;
+        }
+        
+        return $userInfo;
+    }
     
     public function updateLoginTime($id)
     {
